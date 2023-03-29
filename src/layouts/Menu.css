@@ -1,0 +1,22 @@
+.menu {
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  
+  .menu ul {
+    padding: 0;
+  
+  }
+  
+  .menu li {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    list-style: none;
+ 
+  }
+  
+  .menu-item {
+    padding: 0;
+
+  }

@@ -1,63 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {  Table } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {  BsInfoCircle, BsTrash } from 'react-icons/bs';
+import { RiEdit2Fill, } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
-const Detail = (props) => {
-  const [student, setStudent] = useState({});
 
-  useEffect(() => {
-    axios.get(`https://641e8ca0f228f1a83ea5c294.mockapi.io/sinhvien/${props.match.params.id}`)
-      .then((res) => {
-        console.log(res.data);
-        setStudent(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [props.match.params.id]);
+const List = () => {
 
-  console.log(student);
+    const [Sinhvien,setSinhviens]=useState([]);
+    useEffect(function(){
+        async function getSinhviens(){
+            await axios.get('https://641e8ca0f228f1a83ea5c294.mockapi.io/sinhvien').then
+            (function(result)
+            {
+                setSinhviens(result.data);
+            }
+            );
+        }
+        getSinhviens();
+    },[]);
+  
 
   return (
-    <div className="container-fluid p-3">
-      <h1 className="d-flex justify-content-center"><strong>CHI TIẾT SINH VIÊN</strong></h1>
-      <div className="mb-3">
-        <label htmlFor="masv"><strong>Mã sinh viên:</strong></label>
-        <input
-          value={student.masv}
-          className="form-control"
-          type="text"
-          id="masv"
-          name="masv"
-          readOnly
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="hoten"><strong>Họ tên:</strong></label>
-        <input
-          value={student.hoten}
-          className="form-control"
-          type="text"
-          id="hoten"
-          name="hoten"
-          readOnly
-        />
-      </div>
-      <div className="mb-3">
-        <strong>Giới tính:</strong> {student.gioitinh === true ? 'Nam' : 'Nữ'}
-      </div>
-      <div className="mb-3">
-        <label htmlFor="malop"><strong>Mã lớp:</strong></label>
-        <input
-          value={student.malop}
-          className="form-control"
-          type="text"
-          id="malop"
-          name="malop"
-          readOnly
-        />
-      </div>
+    <div className="d-flex justify-content-center">
+      <Table  className="table table-striped table-bordered table-hover w-75">
+        <thead className='thead-light'>
+          <tr className="text-center">
+            <th className="">ID</th>
+            <th className="">Mã SV</th>
+            <th className="">Họ tên</th>
+            <th className="">Giới tính</th>
+            <th className="">Lớp</th>
+            <th className="">Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+        {Sinhvien.map((Sinhvien) => (
+            <tr key={Sinhvien.id} className="text-center">
+              <td className="">{Sinhvien.id}</td>
+              <td className="">{Sinhvien.masv}</td>
+              <td className="">{Sinhvien.hoten}</td>
+              <td className="">{Sinhvien.gioitinh}</td>
+              <td className="">{Sinhvien.malop}</td>
+              <td className=" ">
+                    <Link to={`/detail/${Sinhvien.id}`} className="btn btn-success m-2 ">
+                    <BsInfoCircle />Chi tiết
+                    </Link>
+                    <Link  to={`/delete/${Sinhvien.id}`} className="btn btn-danger m-2 ">
+                    <BsTrash/>Xóa
+                    </Link>
+                    <Link to={`/edit/${Sinhvien.id}`} className="btn btn-warning m-2 ">
+                    <RiEdit2Fill/>Sửa
+                    </Link>
+              </td>
+              <td>
+                  
+    
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };
-
-export default Detail;
+export default List;

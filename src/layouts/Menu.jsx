@@ -12,9 +12,7 @@ function Menu() {
           <Link to={`/create`} className="btn btn-success m-2 ">
                     <RiEdit2Fill />Thêm
                     </Link>          </li>
-          <li className='mt-2'>
-            <Link to={`/trash`} className="btn btn-danger"><BsTrash /> Thùng Rác</Link>
-          </li>
+         
         </ul>
       </div>
      </div>

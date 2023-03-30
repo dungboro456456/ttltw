@@ -1,51 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import {  Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Menu from './Menu';
-import { BsPlus, BsTrash } from 'react-icons/bs';
-import { RiEdit2Fill } from 'react-icons/ri';
+import {  BsInfoCircle, BsTrash } from 'react-icons/bs';
+import { RiEdit2Fill, } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+import axios from "axios";
+
 
 const List = () => {
-  const [students, setStudents] = useState([]);
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      const response = await fetch('https://641e8ca0f228f1a83ea5c294.mockapi.io/sinhvien');
-      const data = await response.json();
-      setStudents(data);
-    };
-    fetchStudents();
-  }, []);
+    const [Sinhvien,setSinhviens]=useState([]);
+    useEffect(function(){
+        async function getSinhviens(){
+            await axios.get('https://641e8ca0f228f1a83ea5c294.mockapi.io/sinhvien').then
+            (function(result)
+            {
+                setSinhviens(result.data);
+            }
+            );
+        }
+        getSinhviens();
+    },[]);
+  const deletee = async (id) => {
+    try {
+      await axios.delete(
+        `https://641e8ca0f228f1a83ea5c294.mockapi.io/sinhvien/${id}`
+      );
+      setSinhviens(Sinhvien.filter((Sinhvien) => Sinhvien.id !== id));
+      alert("Xóa thành công!");
+      window.location = '/list';
+    } catch (error) {
+      console.log(error);
+      alert("Xóa không thành công!");
+    }
+  };
 
   return (
     <div className="d-flex justify-content-center">
-      <Table bordered hover className="w-75">
-        <thead>
+      <Table  className="table table-striped table-bordered table-hover w-75">
+        <thead className='thead-light'>
           <tr className="text-center">
-            <th className="align-middle">ID</th>
-            <th className="align-middle">Mã SV</th>
-            <th className="align-middle">Họ tên</th>
-            <th className="align-middle">Giới tính</th>
-            <th className="align-middle">Lớp</th>
-            <th className="align-middle">Chức năng</th>
+            <th className="">ID</th>
+            <th className="">Mã SV</th>
+            <th className="">Họ tên</th>
+            <th className="">Giới tính</th>
+            <th className="">Lớp</th>
+            <th className="">Chức năng</th>
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.id} className="text-center">
-              <td className="align-middle">{student.id}</td>
-              <td className="align-middle">{student.masv}</td>
-              <td className="align-middle">{student.hotien}</td>
-              <td className="align-middle">{student.gioitinh}</td>
-              <td className="align-middle">{student.malop}</td>
-              <td className="align-middle mr-2">
-
-              <a className='btn btn-success mr-2 px-1' ><BsPlus/>Thêm</a>
-              <a className='btn btn-danger mr-1 px-1' ><BsTrash/>Xóa</a> 
-              <a className='btn btn-danger mr-1 px-1' ><RiEdit2Fill/>Sửa</a> 
-
+        {Sinhvien.map((Sinhvien) => (
+            <tr key={Sinhvien.id} className="text-center">
+              <td className="">{Sinhvien.id}</td>
+              <td className="">{Sinhvien.masv}</td>
+              <td className="">{Sinhvien.hoten}</td>
+              <td className="">{Sinhvien.gioitinh}</td>
+              <td className="">{Sinhvien.malop}</td>
+              <td className=" ">
+                    <Link to={`/detail/${Sinhvien.id}`} className="btn btn-success m-2 ">
+                    <BsInfoCircle />Chi tiết
+                    </Link>
+                    <Link onClick={() => deletee(Sinhvien.id)} to={`/delete/${Sinhvien.id}`} className="btn btn-danger m-2 ">
+                    <BsTrash/>Xóa
+                    </Link>
+                    <Link to={`/edit/${Sinhvien.id}`} className="btn btn-warning m-2 ">
+                    <RiEdit2Fill/>Sửa
+                    </Link>
               </td>
-              
             </tr>
           ))}
         </tbody>
@@ -53,5 +74,4 @@ const List = () => {
     </div>
   );
 };
-
 export default List;

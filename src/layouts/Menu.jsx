@@ -1,17 +1,19 @@
-import { BsPlus, BsTrash } from 'react-icons/bs';
+import { BsInfoCircle, BsPlus, BsTrash } from 'react-icons/bs';
 import { RiEdit2Fill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 import  './Menu.css';
 
 function Menu() {
     return (
-     <div className="container mb-4">
+     <div className="container">
          <div className="menu">
         <ul>
           <li>
-            <button className="btn btn-primary"><BsPlus /> Thêm</button>
-          </li>
-          <li>
-            <button className="btn btn-danger"><BsTrash /> Thùng Rác</button>
+          <Link to={`/create`} className="btn btn-success m-2 ">
+                    <RiEdit2Fill />Thêm
+                    </Link>          </li>
+          <li className='mt-2'>
+            <Link to={`/trash`} className="btn btn-danger"><BsTrash /> Thùng Rác</Link>
           </li>
         </ul>
       </div>

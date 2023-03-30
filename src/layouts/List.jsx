@@ -57,15 +57,16 @@ const List = () => {
               <td className="">{Sinhvien.gioitinh}</td>
               <td className="">{Sinhvien.malop}</td>
               <td className=" ">
-                    <Link to={`/detail/${Sinhvien.id}`} className="btn btn-success m-2 ">
-                    <BsInfoCircle />Chi tiết
-                    </Link>
                     <Link onClick={() => deletee(Sinhvien.id)} to={`/delete/${Sinhvien.id}`} className="btn btn-danger m-2 ">
                     <BsTrash/>Xóa
                     </Link>
                     <Link to={`/edit/${Sinhvien.id}`} className="btn btn-warning m-2 ">
                     <RiEdit2Fill/>Sửa
                     </Link>
+              </td>
+              <td>
+                  
+    
               </td>
             </tr>
           ))}

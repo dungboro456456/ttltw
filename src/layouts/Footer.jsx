@@ -8,9 +8,10 @@ function Footer() {
           <Col>
             <p>Group members:</p>
             <ul>
-              <li>Member 1</li>
-              <li>Member 2</li>
-              <li>Member 3</li>
+              <li>Nguyễn Thái Vũ</li>
+              <li>Thái Hữu Vinh</li>
+              <li>Nguyễn Tấn Dũng</li>
+              <li>Nguyễn Thành Văn</li>
             </ul>
           </Col>
         </Row>

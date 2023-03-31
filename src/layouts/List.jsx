@@ -45,7 +45,9 @@ const List = () => {
             <th className="">Họ tên</th>
             <th className="">Giới tính</th>
             <th className="">Lớp</th>
+            <th className="">Ngày sinh</th>
             <th className="">Chức năng</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -56,6 +58,7 @@ const List = () => {
               <td className="">{Sinhvien.hoten}</td>
               <td className="">{Sinhvien.gioitinh}</td>
               <td className="">{Sinhvien.malop}</td>
+              <td>{new Date(Sinhvien.ngaysinh).toLocaleDateString()}</td>
               <td className=" ">
                     <Link onClick={() => deletee(Sinhvien.id)} to={`/delete/${Sinhvien.id}`} className="btn btn-danger m-2 ">
                     <BsTrash/>Xóa
@@ -63,10 +66,6 @@ const List = () => {
                     <Link to={`/edit/${Sinhvien.id}`} className="btn btn-warning m-2 ">
                     <RiEdit2Fill/>Sửa
                     </Link>
-              </td>
-              <td>
-                  
-    
               </td>
             </tr>
           ))}

@@ -3,7 +3,6 @@ import Detail from '../layouts/Detail';
 import Edit from '../layouts/Edit';
 import Footer from '../layouts/Footer';
 import List from '../layouts/List';
-import Trash from '../layouts/Trash';
 import Contact from '../pages/Contact';
 import Home from '../pages/Home';
 import Introduce from '../pages/Introduce';
@@ -20,7 +19,6 @@ const listRoute=[
         { path:'/create', component:Create},
         { path:'/edit', component:Edit},
         { path:'/detail', component:Detail},
-        { path:'/trash', component:Trash},
         { path:'/introduce', component:Introduce},
         { path:'/post', component:Post},
         { path:'/product', component:Product},
